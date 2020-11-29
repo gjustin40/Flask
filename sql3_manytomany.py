@@ -31,3 +31,17 @@ class User(db.Model):
 class Channel(db.Model):
     channel_id = db.Column(db.Integer, primary_key=True)
     channel_name = db.Column(db.String(50))
+
+
+
+'''
+    User : 4개의 user1~4가 있다고 가정
+    Channel : 2개의 channel1~2가 있다고 가정
+
+    1. channel마다 보고있는 user 설정
+    - channel1.subscribers.append(user1)  /  (subscribers == backref에서 정한 이름)
+    - channel1.subscribers.append(user2)
+    - channel1.subscribers[0].name
+
+    2. user마다 보고있는 channel은 반대로
+'''
