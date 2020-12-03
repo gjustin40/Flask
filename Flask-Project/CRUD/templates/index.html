@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %} Flask CRUD {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col  md-12">
+            <div class="jumbotron p-3">
+                <h2>Manage<b>Employees</b> <button type="button" class="btn btn-success float-right" data-toggle="modal"
+                        data-target="#mymodal">Add New Employee</button></h2>
+
+                <table class="table table-hover table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for user in user_list %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ user.user_name }}</td>
+                        <td>{{ user.user_email }}</td>
+                        <td>{{ user.user_phone }}</td>
+                        <td>
+                            <a href="" class="btn btn-warning btn-sm" data-toggle="modal"
+                                data-target="#modaledit{{ user.user_id }}">Edit</a>
+                            <a href="{{ url_for('delete_user', user_id=user.user_id) }}" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Are you sure to delete?')">Delete</a>
+                        </td>
+                    </tr>
+                    
+                    <!-- Modal Edit Employee -->
+                    <div id="modaledit{{ user.user_id }}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Edit Employee</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ url_for('update_user') }}" method="POST">
+                                        <div class="form-group">
+                                            <label>Name: </label>
+                                            <input type="hidden" name="id" value="{{ user.user_id }}">
+                                            <input type="text" class="form-control" name="name" value="{{ user.user_name }}"
+                                                required="1">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Email: </label>
+                                            <input type="email" class="form-control" name="email"
+                                                value="{{ user.user_email }}" required="1">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Phone </label>
+                                            <input type="number" class="form-control" name="phone" value="{{ user.user_phone }}"
+                                                required="1">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" type="submit">Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </table>
+
+            </div>
+
+            <!-- Modal Add Employee-->
+
+            <div id="mymodal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add Employee</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ url_for('add_user') }}" method="POST">
+                                <div class="form-group">
+                                    <label>Name: </label>
+                                    <input type="text" class="form-control" name="name" required="1">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Email: </label>
+                                    <input type="email" class="form-control" name="email" required="1">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Phone </label>
+                                    <input type="number" class="form-control" name="phone" required="1">
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit">Add Employee</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
