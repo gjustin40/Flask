@@ -1,0 +1,7 @@
+<h1>Question : {{ choice_list[0].question.question_text }}</h1>
+
+<ul>
+    {% for choice in choice_list %}
+    <li>{{ choice.choice_text }}</li>
+    {% endfor %}
+</ul>
