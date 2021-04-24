@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코로나 지역 현황</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
+    <style>
+        div>h1 {
+            text-align: center;
+        }
+
+        canvas {
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>코로나 지역 현황</h1>
+
+    {% for d in data %}
+    {{d.gubun}}
+    {% endfor %}
+    <hr>
+    사망자(누적)
+    {% for d in data %}{{d.deathCnt}}{% endfor %}
+    <hr>
+    격리해제 수
+    {% for d in data %}
+    {{d.isolClearCnt}}
+    {% endfor %}
+    <hr>
+    전일대비 증감 수 - 확진자
+    {% for d in data %}
+    {{d.incDec}}
+    {% endfor %}
+    <hr>
+    10만명당 발생률
+    {% for d in data %}
+    {{d.qurRate}}
+    {% endfor %}
+
+    <div>
+        <h1>지역별 사망자 누적 수</h1>
+        <canvas id="deathCnt" width="400" height="400"></canvas>
+
+        <h1>전일 대비 증감 수 - 확진자</h1>
+        <canvas id="incDec" width="400" height="400"></canvas>
+    </div>
+
+    <script>
+        // 지역 표현 색깔
+        location_list = [{% for d in data %} "{{d.gubun}}", {% endfor %}]
+        colorList = [
+            'rgba(0, 99, 132, 0.2)',
+            'rgba(0, 162, 235, 0.2)',
+            'rgba(0, 206, 86, 0.2)',
+            'rgba(0, 192, 192, 0.2)',
+            'rgba(0, 102, 255, 0.2)',
+            'rgba(0, 159, 64, 0.2)',
+            'rgba(255, 0, 132, 0.2)',
+            'rgba(54, 0, 235, 0.2)',
+            'rgba(255, 0, 86, 0.2)',
+            'rgba(75, 0, 192, 0.2)',
+            'rgba(153, 0, 255, 0.2)',
+            'rgba(255, 0, 64, 0.2)',
+            'rgba(255, 99, 0, 0.2)',
+            'rgba(54, 162, 0, 0.2)',
+            'rgba(255, 206, 0, 0.2)',
+            'rgba(75, 192, 0, 0.2)',
+            'rgba(153, 102, 0, 0.2)',
+            'rgba(255, 159, 0, 0.2)',
+            'rgba(0, 0, 64, 0.2)',
+        ]
+
+
+        // 사망자 수 그래프
+        deathCnt_data = [{% for d in data %}{{d.deathCnt }}, {% endfor %}]
+
+        var ctx_deathCnt = document.getElementById('deathCnt').getContext('2d');
+
+        var deathChart = new Chart(ctx_deathCnt, {
+            type: 'doughnut',
+            data: {
+                labels: location_list,
+                datasets: [{
+                    label: '사망자 누적 수',
+                    data: deathCnt_data,
+                    backgroundColor: colorList,
+                }]
+            },
+            options: {
+                responsive: false
+            }
+        });
+
+        // 전일 대비 증감 수 - 확진자
+        incDec_data = [{% for d in data %}{{d.incDec}}, {% endfor %}]
+
+        var ctx_incDec = document.getElementById('incDec').getContext('2d');
+
+        var deathChart = new Chart(ctx_incDec, {
+            type: 'doughnut',
+            data: {
+                labels: location_list,
+                datasets: [{
+                    label: '사망자 누적 수',
+                    data: incDec_data,
+                    backgroundColor: colorList,
+                }]
+            },
+            options: {
+                responsive: false
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
