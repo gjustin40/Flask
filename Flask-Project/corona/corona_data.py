@@ -26,3 +26,7 @@ def get_corona_data(startCreateDt, endCreateDt):
     area_data.reverse()
 
     return area_data
+
+if __name__ == '__main__':
+    print(get_corona_data(20210423, 20210423))
+    print(get_corona_data(20210423, 20210423))

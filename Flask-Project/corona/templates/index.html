@@ -7,42 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>코로나 지역 현황</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
-    <style>
-        div>h1 {
-            text-align: center;
-        }
-
-        canvas {
-            margin: 0 auto;
-        }
-    </style>
+    <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}">
 </head>
 
 <body>
     <h1>코로나 지역 현황</h1>
-
-    {% for d in data %}
-    {{d.gubun}}
-    {% endfor %}
     <hr>
-    사망자(누적)
-    {% for d in data %}{{d.deathCnt}}{% endfor %}
-    <hr>
-    격리해제 수
-    {% for d in data %}
-    {{d.isolClearCnt}}
-    {% endfor %}
-    <hr>
-    전일대비 증감 수 - 확진자
-    {% for d in data %}
-    {{d.incDec}}
-    {% endfor %}
-    <hr>
-    10만명당 발생률
-    {% for d in data %}
-    {{d.qurRate}}
-    {% endfor %}
-
     <div>
         <h1>지역별 사망자 누적 수</h1>
         <canvas id="deathCnt" width="400" height="400"></canvas>
@@ -53,7 +23,7 @@
 
     <script>
         // 지역 표현 색깔
-        location_list = [{% for d in data %} "{{d.gubun}}", {% endfor %}]
+        location_list = [{% for d in data %} "{{d.gubun}}", {% endfor %}].slice(1)
         colorList = [
             'rgba(0, 99, 132, 0.2)',
             'rgba(0, 162, 235, 0.2)',

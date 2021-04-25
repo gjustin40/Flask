@@ -1,0 +1,11 @@
+div>h1 {
+    text-align: center;
+}
+
+canvas {
+    margin: 0 auto;
+}
+
+body > h1 {
+    text-align: center;
+}
