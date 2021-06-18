@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+    <form method="POST" class="post-form my-3">
+
+        {{ form.subject.label }}
+        {{ form.subject(class='form-control') }}
+
+        {{ form.content.label }}
+        {{ form.content(class='form-control') }}
+
+        <button class="btn btn-primary" type="submit">저장하기</button>
+    </form>
+</div>
+
+{% endblock content %}
