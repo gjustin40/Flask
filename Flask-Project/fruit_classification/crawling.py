@@ -13,4 +13,4 @@ def get_info(fruit_name):
     info = p.text
     return info
 
-print(get_info('banana'))
+# print(get_info('banana'))

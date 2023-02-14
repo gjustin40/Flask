@@ -1,7 +1,7 @@
 @echo off
-cd C:/Users/gjustin/Documents/GitHub/Flask/Flask-Tutorial
+cd C:\Users\gjust\Documents\Github\Flask\Flask-Tutorial\
 
 set FLASK_APP=app
 set FLASK_ENV=development
 
-C:\Users\gjustin\Documents\GitHub\Flask\Flask-Tutorial\venv\Scripts\activate
+C:\Users\gjust\Documents\Github\Flask\Flask-Tutorial\venv\Scripts\activate

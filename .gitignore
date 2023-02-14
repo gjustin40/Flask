@@ -136,3 +136,24 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+*.cmd
+*.jpg
+*.zip
+*.cmd
+*.cmd
+
+*.pth
+*.jpg
+*.png
+*.JPG
+*.mp4
+*.txt
+*.json
+*.gif
+*.zip
+*.gz
+*.exe
+*.pkl
+*.pth
+*.pt
+*checkpoint.ipynb
